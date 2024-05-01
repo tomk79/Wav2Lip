@@ -232,12 +232,12 @@ def load_checkpoint(path, model, optimizer, reset_optimizer=False):
 
     print("Load checkpoint from: {}".format(path))
     checkpoint = _load(path)
-    model.load_state_dict(checkpoint["state_dict"])
+    model.load_state_dict(checkpoint["state_dict"], strict=False)
     if not reset_optimizer:
         optimizer_state = checkpoint["optimizer"]
         if optimizer_state is not None:
             print("Load optimizer state from {}".format(path))
-            optimizer.load_state_dict(checkpoint["optimizer"])
+            optimizer.load_state_dict(checkpoint["optimizer"], strict=False)
     global_step = checkpoint["global_step"]
     global_epoch = checkpoint["global_epoch"]
 

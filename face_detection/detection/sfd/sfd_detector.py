@@ -24,7 +24,7 @@ class SFDDetector(FaceDetector):
             model_weights = torch.load(path_to_detector)
 
         self.face_detector = s3fd()
-        self.face_detector.load_state_dict(model_weights)
+        self.face_detector.load_state_dict(model_weights, strict=False)
         self.face_detector.to(device)
         self.face_detector.eval()
 

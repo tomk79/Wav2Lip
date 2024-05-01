@@ -323,12 +323,12 @@ def load_checkpoint(path, model, optimizer, reset_optimizer=False, overwrite_glo
     new_s = {}
     for k, v in s.items():
         new_s[k.replace('module.', '')] = v
-    model.load_state_dict(new_s)
+    model.load_state_dict(new_s, strict=False)
     if not reset_optimizer:
         optimizer_state = checkpoint["optimizer"]
         if optimizer_state is not None:
             print("Load optimizer state from {}".format(path))
-            optimizer.load_state_dict(checkpoint["optimizer"])
+            optimizer.load_state_dict(checkpoint["optimizer"], strict=False)
     if overwrite_global_states:
         global_step = checkpoint["global_step"]
         global_epoch = checkpoint["global_epoch"]
